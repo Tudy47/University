@@ -32,23 +32,30 @@ public class Dec2Bin {
         this.N = N;
         binStack.clear();
 
-        if (N==0){
+        if(N==0) {
             binStack.push(0);
             return;
         }
 
-        while (N>0){
-            int remainder = N%2;
-            binStack.push(remainder);
-            N=N/2;
+        Stack<Integer> temp = new Stack<>();
+
+        while(N>0) {
+            temp.push(N%2);
+            N /= 2;
         }
 
-        Stack<Integer> stack = new Stack<>();
-        while (!binStack.isEmpty()){
-            stack.push(binStack.pop());
+        //Stack<Integer> order = new Stack<>();
+        while(!temp.isEmpty()) {
+            binStack.push(temp.pop());
         }
-        binStack = stack;
+
+       // while(!order.isEmpty()) {
+       //     binStack.push(order.pop());
+       // }
     }
+
+
+
 
     /**
      * Returns the digits that are stored in {@code binStack} as a string. To is the binary format of the
@@ -73,7 +80,7 @@ public class Dec2Bin {
 
     public static void main(String[] args) {
         Dec2Bin dec2bin = new Dec2Bin();
-        dec2bin.convert(50);
+        dec2bin.convert(78);
         System.out.println("Die Zahl " + dec2bin.getN() + " in Binärdarstellung: " + dec2bin);
         // Do it another time to demonstrate that toString does not erase the binStack.
         System.out.println("Die Zahl " + dec2bin.getN() + " in Binärdarstellung: " + dec2bin);
